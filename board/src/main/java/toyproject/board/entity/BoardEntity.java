@@ -25,14 +25,6 @@ public class BoardEntity extends BaseEntity{
 
     private int boardHits;
 
-//    protected BoardEntity(){}
-//    public BoardEntity(BoardDTO boardDTO){
-//        this.boardWriter = boardDTO.getBoardWriter();
-//        this.boardPass=boardDTO.getBoardPass();
-//        this.boardTitle=boardDTO.getBoardTitle();
-//        this.boardContents=boardDTO.getBoardContents();
-//        this.boardHits=0;
-//    }
 
     public static BoardEntity toSaveEntity(BoardDTO boardDTO){
         BoardEntity boardEntity = new BoardEntity();

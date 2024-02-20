@@ -65,9 +65,17 @@ public class BoardService {
         return findById(boardDTO.getId());
     }
 
-//    @Transactional(readOnly = false)
-//    public BoardDTO updateBoard(Long id, BoardDTO boardDTO) {
-//        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
-//        BoardEntity updateEntity = optionalBoardEntity.get().toUpdateEntity(boardDTO);
-//    }
+    @Transactional(readOnly = false)
+    public BoardDTO updateBoard(Long id, BoardDTO boardDTO) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+        BoardEntity updateEntity = optionalBoardEntity.get().toUpdateEntity(boardDTO);
+        return BoardDTO.toBoardDTO(updateEntity);
+    }
+    @Transactional(readOnly = false)
+    public BoardDTO updateBoard2(Long id, BoardDTO boardDTO) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+        optionalBoardEntity.get().toUpdateEntity2(boardDTO);
+
+        return BoardDTO.toBoardDTO(optionalBoardEntity.get());
+    }
 }

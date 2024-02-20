@@ -58,11 +58,11 @@ public class BoardController {
         return "update";
     }
 
-    @PostMapping("/update")
-    public String update(@ModelAttribute BoardDTO boardDTO, Model model){
-        BoardDTO board =boardService.update(boardDTO);
+    @PostMapping("/update/{id}")
+    public String update(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO, Model model){
+        BoardDTO board = boardService.updateBoard2(id, boardDTO);
         model.addAttribute("board", board);
         return "detail";
-//        return "redirect:/board/" + boardDTO.getId();  -> 조회수가 늘어남...
+//        return "redirect:/board/" + boardDTO.getId();
     }
 }

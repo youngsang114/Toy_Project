@@ -57,4 +57,14 @@ public class BoardEntity extends BaseEntity{
 
         return boardEntity;
     }
+
+    public void toUpdateEntity2(BoardDTO boardDTO){
+
+        this.boardWriter = boardDTO.getBoardWriter();
+        this.boardPass = boardDTO.getBoardPass();
+        this.boardTitle= boardDTO.getBoardTitle();
+        this.boardContents = boardDTO.getBoardContents();
+        this.boardHits = boardDTO.getBoardHits();
+
+    }
 }

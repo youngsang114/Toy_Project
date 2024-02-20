@@ -44,4 +44,9 @@ public class BoardRepository {
 
         query.executeUpdate();
     }
+
+    public void deleteById(Long id) {
+        Optional<BoardEntity> optionalBoardEntity = findById(id);
+        optionalBoardEntity.ifPresent(boardEntity -> em.remove(boardEntity));
+    }
 }

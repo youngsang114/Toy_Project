@@ -58,12 +58,6 @@ public class BoardService {
                 .orElseThrow(() ->  new RuntimeException("게시물이 존재하지 않습니다. ID: " + id));
     }
 
-    @Transactional(readOnly = false)
-    public BoardDTO update(BoardDTO boardDTO) {
-        BoardEntity boardEntity=BoardEntity.toUpdateEntity(boardDTO);
-        boardRepository.save(boardEntity);
-        return findById(boardDTO.getId());
-    }
 
     @Transactional(readOnly = false)
     public BoardDTO updateBoard(Long id, BoardDTO boardDTO) {
@@ -74,8 +68,16 @@ public class BoardService {
     @Transactional(readOnly = false)
     public BoardDTO updateBoard2(Long id, BoardDTO boardDTO) {
         Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
-        optionalBoardEntity.get().toUpdateEntity2(boardDTO);
 
-        return BoardDTO.toBoardDTO(optionalBoardEntity.get());
+//        optionalBoardEntity.get().toUpdateEntity2(boardDTO);
+        BoardEntity boardEntity = optionalBoardEntity.orElseThrow(() -> new RuntimeException("게시물이 존재하지 않습니다. ID: " + id));
+        boardEntity.toUpdateEntity2(boardDTO);
+
+        return BoardDTO.toBoardDTO(boardEntity);
+    }
+
+    @Transactional(readOnly = false)
+    public void delete(Long id) {
+        boardRepository.deleteById(id);
     }
 }

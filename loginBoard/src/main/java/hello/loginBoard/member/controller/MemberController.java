@@ -4,6 +4,8 @@ import hello.loginBoard.member.domain.Member;
 import hello.loginBoard.member.dto.LoginFormDTO;
 import hello.loginBoard.member.dto.MemberSaveDTO;
 import hello.loginBoard.member.service.MemberService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.Value;
@@ -47,7 +49,8 @@ public class MemberController {
         return "login/loginForm";
     }
     @PostMapping("/login")
-    public String login(@Valid @ModelAttribute("loginFormDTO") LoginFormDTO loginFormDTO, BindingResult bindingResult){
+    public String login(@Valid @ModelAttribute("loginFormDTO") LoginFormDTO loginFormDTO, BindingResult bindingResult,
+                        HttpServletRequest request){
 
         if (bindingResult.hasErrors()){
             log.info("field error 발생");
@@ -56,6 +59,12 @@ public class MemberController {
         try{
             Member loginMember = memberService.login(loginFormDTO);
             log.info("login? {}",loginMember);
+
+            // 세션이 있으면 있는 세션 반환, 없으면 신규 세션 생성
+            HttpSession session = request.getSession();
+            // 세션에 로그인 회원 정보 보관
+            session.setAttribute("loginMember",loginMember);
+
             return "redirect:/";
 
         } catch (RuntimeException e){
@@ -65,5 +74,13 @@ public class MemberController {
         }
     }
 
+    @PostMapping("/logout")
+    public String logout(HttpServletRequest request){
+        HttpSession session = request.getSession(false);
+        if (session!=null){
+            session.invalidate();
+        }
+        return "redirect:/";
+    }
 
 }

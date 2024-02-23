@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -57,7 +58,28 @@ public class BoardController {
         boardService.updateHits(id);
         BoardDTO boardDTO = boardService.findById(id);
         model.addAttribute("board", boardDTO);
-        return "board/detail.html";
+        return "board/detail";
 
     }
+    @GetMapping("/board/update/{id}")
+    public String updateForm(@PathVariable("id") Long id, Model model){
+        BoardDTO boardDTO = boardService.findById(id);
+        model.addAttribute("boardUpdate", boardDTO);
+        return "board/update";
+    }
+
+
+    @PostMapping("/board/update/{id}")
+    public String update(@PathVariable("id") Long id, @ModelAttribute BoardDTO boardDTO, Model model) {
+        BoardDTO board = boardService.updateBoard(id, boardDTO);
+        model.addAttribute("board", board);
+        return "/board/detail";
+    }
+
+    @GetMapping("/board/delete/{id}")
+    public String delete(@PathVariable("id") Long id){
+        boardService.delete(id);
+        return "redirect:/board";
+    }
+
 }

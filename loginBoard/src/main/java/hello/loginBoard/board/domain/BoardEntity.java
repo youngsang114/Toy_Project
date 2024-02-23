@@ -1,5 +1,6 @@
 package hello.loginBoard.board.domain;
 
+import hello.loginBoard.board.dto.BoardDTO;
 import hello.loginBoard.member.domain.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -28,4 +29,8 @@ public class BoardEntity extends BaseEntity{
 
     private int boardHits;
 
+    public void updateEntity(BoardDTO boardDTO) {
+        this.boardTitle= boardDTO.getBoardTitle();
+        this.boardContents= boardDTO.getBoardContents();
+    }
 }

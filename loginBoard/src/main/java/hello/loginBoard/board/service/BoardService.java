@@ -11,6 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Slf4j
@@ -61,5 +62,20 @@ public class BoardService {
                 .map((boardEntity) -> BoardDTO.toBoardDTO(boardEntity))
                 .orElseThrow(() -> new RuntimeException());
 
+    }
+
+    @Transactional(readOnly = false)
+    public BoardDTO updateBoard(Long id, BoardDTO boardDTO) {
+        Optional<BoardEntity> optionalBoardEntity = boardRepository.findById(id);
+
+        BoardEntity boardEntity = optionalBoardEntity.orElseThrow(() -> new RuntimeException());
+        boardEntity.updateEntity(boardDTO);
+
+        return BoardDTO.toBoardDTO(boardEntity);
+    }
+
+    @Transactional(readOnly = false)
+    public void delete(Long id) {
+        boardRepository.delete(id);
     }
 }

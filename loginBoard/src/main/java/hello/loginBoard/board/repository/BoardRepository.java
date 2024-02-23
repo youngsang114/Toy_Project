@@ -38,4 +38,8 @@ public class BoardRepository {
     }
 
 
+    public void delete(Long id) {
+        Optional<BoardEntity> optionalBoardEntity = findById(id);
+        optionalBoardEntity.ifPresent(boardEntity -> em.remove(boardEntity));
+    }
 }

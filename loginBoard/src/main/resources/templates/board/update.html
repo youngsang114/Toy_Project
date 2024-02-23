@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        #boardContents {
+            height: 200px; /* 내용 입력창 크기 조정 */
+            resize: vertical; /* 사용자가 크기를 조절할 수 있도록 설정 */
+        }
+
+        /* 버튼들을 한 줄에 가로로 나열하기 */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container button,
+        .button-container a {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body class="container" th:object="${boardUpdate}">
+<div class="py-5 text-center">
+    <h2>게시글 수정</h2>
+</div>
+<form th:action="@{'/board/update/' + ${boardUpdate.id}}" th:object="${boardUpdate}" method="post">
+    <table class="table table-bordered">
+        <tbody>
+        <tr>
+            <th scope="col">ID</th>
+            <td th:text="${boardUpdate.id}"></td>
+        </tr>
+        <tr>
+            <th scope="col">제목</th>
+            <td><input type="text" th:field="*{boardTitle}" class="form-control"></td>
+        </tr>
+        <tr>
+            <th scope="col">작성자</th>
+            <td th:text="${boardUpdate.member.loginId}"></td>
+        </tr>
+        <tr>
+            <th scope="col">작성일</th>
+            <td th:text="${boardUpdate.boardCreatedTime}"></td>
+        </tr>
+        <tr>
+            <th scope="col">조회수</th>
+            <td th:text="${boardUpdate.boardHits}"></td>
+        </tr>
+        <tr>
+            <th scope="col">내용</th>
+            <td><textarea id="boardContents" th:field="*{boardContents}" class="form-control"></textarea></td>
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="button-container">
+        <button type="submit" class="btn btn-primary">수정</button>
+        <a th:href="@{/board}" class="btn btn-secondary">취소</a>
+    </div>
+</form>
+</body>
+</html>

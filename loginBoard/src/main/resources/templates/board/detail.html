@@ -24,6 +24,13 @@
             flex: 1;
             margin-right: 10px;
         }
+
+        .delete-button {
+            flex: 1;
+            margin-right: 10px;
+            font-size: 14px;
+            padding: 10px;
+        }
     </style>
 </head>
 <body class="container">
@@ -58,17 +65,23 @@
             <pre id="boardContents" th:text="${board.boardContents}"></pre>
         </td>
     </tr>
+    <!-- 다른 테이블 내용들도 추가 -->
     </tbody>
 </table>
 
-<!-- 버튼들을 한 줄에 가로로 나열 -->
 <div class="button-container">
     <a class="btn btn-primary btn-lg w-100" th:href="@{/board}">목록</a>
     <a class="btn btn-warning btn-lg w-100" th:href="@{/board/update/{id}(id=${board.id})}">수정</a>
-    <form action="/board/delete" method="post">
-        <input type="hidden" name="id" th:value="${board.id}" />
-        <button class="btn btn-danger btn-lg w-100" type="submit">삭제</button>
-    </form>
+    <button class="btn btn-danger btn-lg delete-button" onclick="deleteBoard()">삭제</button>
 </div>
+
+<script th:inline="javascript">
+    function deleteBoard() {
+        var boardId = /*[[${board.id}]]*/ null;
+        if (boardId) {
+            window.location.href = "/board/delete/" + boardId;
+        }
+    }
+</script>
 </body>
 </html>

@@ -51,4 +51,15 @@ public class BoardService {
                 .build();
         boardRepository.save(boardEntity);
     }
+    @Transactional(readOnly = false)
+    public void updateHits(Long id) {
+        boardRepository.updateHits(id);
+    }
+
+    public BoardDTO findById(Long id) {
+        return boardRepository.findById(id)
+                .map((boardEntity) -> BoardDTO.toBoardDTO(boardEntity))
+                .orElseThrow(() -> new RuntimeException());
+
+    }
 }

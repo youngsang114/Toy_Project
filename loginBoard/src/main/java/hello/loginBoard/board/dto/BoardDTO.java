@@ -1,5 +1,6 @@
 package hello.loginBoard.board.dto;
 
+import hello.loginBoard.board.domain.BoardEntity;
 import hello.loginBoard.member.domain.Member;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.JoinColumn;
@@ -22,10 +23,14 @@ public class BoardDTO {
     private LocalDateTime boardCreatedTime;
     private Member member;
 
-    public BoardDTO saveForm(){
+    public static BoardDTO toBoardDTO(BoardEntity boardEntity){
         return BoardDTO.builder()
-                .boardTitle(this.boardTitle)
-                .boardContents(this.boardContents)
+                .id(boardEntity.getId())
+                .boardTitle(boardEntity.getBoardTitle())
+                .boardContents(boardEntity.getBoardContents())
+                .boardHits(boardEntity.getBoardHits())
+                .boardCreatedTime(boardEntity.getCreatedTime())
+                .member(boardEntity.getMember())
                 .build();
     }
 }

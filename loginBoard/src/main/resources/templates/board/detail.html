@@ -1,0 +1,74 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <link href="../css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" rel="stylesheet">
+    <style>
+        .container {
+            max-width: 560px;
+        }
+
+        #boardContents {
+            height: 200px; /* 내용 입력창 크기 조정 */
+            resize: vertical; /* 사용자가 크기를 조절할 수 있도록 설정 */
+        }
+
+        /* 버튼들을 한 줄에 가로로 나열하기 */
+        .button-container {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 20px;
+        }
+
+        .button-container a {
+            flex: 1;
+            margin-right: 10px;
+        }
+    </style>
+</head>
+<body class="container">
+<div class="py-5 text-center">
+    <h2>게시글 상세</h2>
+</div>
+<table class="table table-bordered">
+    <tbody>
+    <tr>
+        <th scope="col">ID</th>
+        <td th:text="${board.id}"></td>
+    </tr>
+    <tr>
+        <th scope="col">제목</th>
+        <td th:text="${board.boardTitle}"></td>
+    </tr>
+    <tr>
+        <th scope="col">작성자</th>
+        <td th:text="${board.member.loginId}"></td>
+    </tr>
+    <tr>
+        <th scope="col">작성일</th>
+        <td th:text="${board.boardCreatedTime}"></td>
+    </tr>
+    <tr>
+        <th scope="col">조회수</th>
+        <td th:text="${board.boardHits}"></td>
+    </tr>
+    <tr>
+        <th scope="col">내용</th>
+        <td>
+            <pre id="boardContents" th:text="${board.boardContents}"></pre>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- 버튼들을 한 줄에 가로로 나열 -->
+<div class="button-container">
+    <a class="btn btn-primary btn-lg w-100" th:href="@{/board}">목록</a>
+    <a class="btn btn-warning btn-lg w-100" th:href="@{/board/update/{id}(id=${board.id})}">수정</a>
+    <form action="/board/delete" method="post">
+        <input type="hidden" name="id" th:value="${board.id}" />
+        <button class="btn btn-danger btn-lg w-100" type="submit">삭제</button>
+    </form>
+</div>
+</body>
+</html>

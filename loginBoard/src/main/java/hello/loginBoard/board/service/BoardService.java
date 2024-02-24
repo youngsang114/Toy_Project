@@ -27,15 +27,7 @@ public class BoardService {
         List<BoardDTO> boardDTOList =new ArrayList<>();
 
         for (BoardEntity boardEntity:boardEntityList){
-            BoardDTO boardDTO = BoardDTO.builder()
-                    .id(boardEntity.getId())
-                    .boardTitle(boardEntity.getBoardTitle())
-                    .boardContents(boardEntity.getBoardContents())
-                    .boardHits(boardEntity.getBoardHits())
-                    .boardCreatedTime(boardEntity.getCreatedTime())
-                    .member(boardEntity.getMember())
-                    .build();
-
+            BoardDTO boardDTO = BoardDTO.toBoardDTO(boardEntity);
             boardDTOList.add(boardDTO);
 
         }
@@ -44,6 +36,7 @@ public class BoardService {
 
     @Transactional(readOnly = false)
     public void save(BoardDTO boardDTO, Member member) {
+
         BoardEntity boardEntity = BoardEntity.builder()
                 .boardTitle(boardDTO.getBoardTitle())
                 .boardContents(boardDTO.getBoardContents())

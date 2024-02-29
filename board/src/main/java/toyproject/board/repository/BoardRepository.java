@@ -69,4 +69,7 @@ public class BoardRepository {
 
         return new PageImpl<>(resultList, PageRequest.of(page, pageLimit), total);
     }
+
+
 }
+

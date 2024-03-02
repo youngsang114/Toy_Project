@@ -22,6 +22,7 @@ public class LoggerFilter implements Filter {
 
         ContentCachingRequestWrapper req = new ContentCachingRequestWrapper((HttpServletRequest) request);
         ContentCachingResponseWrapper res = new ContentCachingResponseWrapper((HttpServletResponse) response);
+        log.info("INIT URI={}",req.getRequestURI());
 
         chain.doFilter(req,res);
 

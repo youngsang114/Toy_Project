@@ -1,6 +1,6 @@
 package hello.loginBoard;
 
-import hello.loginBoard.member.interceptor.LoginCheckInterceptor;
+import hello.loginBoard.login.interceptor.LoginCheckInterceptor;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;

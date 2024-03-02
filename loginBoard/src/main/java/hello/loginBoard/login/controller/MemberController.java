@@ -1,14 +1,13 @@
-package hello.loginBoard.member.controller;
+package hello.loginBoard.login.controller;
 
-import hello.loginBoard.member.domain.Member;
-import hello.loginBoard.member.dto.LoginFormDTO;
-import hello.loginBoard.member.dto.MemberSaveDTO;
-import hello.loginBoard.member.service.MemberService;
+import hello.loginBoard.login.domain.Member;
+import hello.loginBoard.login.dto.LoginFormDTO;
+import hello.loginBoard.login.dto.MemberSaveDTO;
+import hello.loginBoard.login.service.MemberService;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import lombok.Value;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

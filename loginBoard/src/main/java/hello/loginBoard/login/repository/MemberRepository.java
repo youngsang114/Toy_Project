@@ -1,6 +1,6 @@
-package hello.loginBoard.member.repository;
+package hello.loginBoard.login.repository;
 
-import hello.loginBoard.member.domain.Member;
+import hello.loginBoard.login.domain.Member;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import lombok.RequiredArgsConstructor;

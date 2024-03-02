@@ -1,12 +1,11 @@
-package hello.loginBoard.member.service;
+package hello.loginBoard.login.service;
 
-import hello.loginBoard.member.domain.Member;
-import hello.loginBoard.member.dto.LoginFormDTO;
-import hello.loginBoard.member.dto.MemberSaveDTO;
-import hello.loginBoard.member.repository.MemberRepository;
+import hello.loginBoard.login.domain.Member;
+import hello.loginBoard.login.dto.LoginFormDTO;
+import hello.loginBoard.login.dto.MemberSaveDTO;
+import hello.loginBoard.login.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -3,7 +3,7 @@ package hello.loginBoard.board.service;
 import hello.loginBoard.board.domain.BoardEntity;
 import hello.loginBoard.board.dto.BoardDTO;
 import hello.loginBoard.board.repository.BoardRepository;
-import hello.loginBoard.member.domain.Member;
+import hello.loginBoard.login.domain.Member;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;

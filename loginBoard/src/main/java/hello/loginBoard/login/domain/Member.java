@@ -1,4 +1,4 @@
-package hello.loginBoard.member.domain;
+package hello.loginBoard.login.domain;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

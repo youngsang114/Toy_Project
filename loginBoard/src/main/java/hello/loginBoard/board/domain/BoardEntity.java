@@ -1,7 +1,7 @@
 package hello.loginBoard.board.domain;
 
 import hello.loginBoard.board.dto.BoardDTO;
-import hello.loginBoard.member.domain.Member;
+import hello.loginBoard.login.domain.Member;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;

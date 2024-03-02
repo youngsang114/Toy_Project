@@ -1,4 +1,4 @@
-package hello.loginBoard.member.dto;
+package hello.loginBoard.login.dto;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -2,12 +2,11 @@ package hello.loginBoard.board.controller;
 
 import hello.loginBoard.board.dto.BoardDTO;
 import hello.loginBoard.board.service.BoardService;
-import hello.loginBoard.member.domain.Member;
+import hello.loginBoard.login.domain.Member;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Controller;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;

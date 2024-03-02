@@ -1,10 +1,7 @@
 package hello.loginBoard.board.dto;
 
 import hello.loginBoard.board.domain.BoardEntity;
-import hello.loginBoard.member.domain.Member;
-import jakarta.persistence.FetchType;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import hello.loginBoard.login.domain.Member;
 import lombok.*;
 
 import java.time.LocalDateTime;

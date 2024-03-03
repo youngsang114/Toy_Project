@@ -35,10 +35,11 @@ public class LoggerFilter implements Filter {
 
             // authorization-token : ???? , user-agent : ??? , ....형태로 들어가게 된다
             headerValues
+                    .append("[")
                     .append(headerKey)
                     .append(" : ")
                     .append(headerValue)
-                    .append(" , ");
+                    .append("] ");
         });
 
         String requestBody = new String(req.getContentAsByteArray());
@@ -54,10 +55,11 @@ public class LoggerFilter implements Filter {
             String headerValue = req.getHeader(headerKey);
 
             responseHeaderValues
+                    .append("[")
                     .append(headerKey)
                     .append(" : ")
                     .append(headerValue)
-                    .append(" , ");
+                    .append("] ");
         });
 
         String responseBody = new String(res.getContentAsByteArray());

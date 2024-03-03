@@ -34,8 +34,8 @@ public class UserSessionResolver implements HandlerMethodArgumentResolver {
         // support parameter에서  true 반환시 여기 실행
 
         // request context holder에서 찾아오기
-        RequestAttributes requestAttributes = RequestContextHolder.getRequestAttributes();
-        Object userId = requestAttributes.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
+        RequestAttributes requestContext = RequestContextHolder.getRequestAttributes();
+        Object userId = requestContext.getAttribute("userId", RequestAttributes.SCOPE_REQUEST);
 
         UserEntity userEntity = userService.getUserWithThrow(Long.parseLong(userId.toString()));
 

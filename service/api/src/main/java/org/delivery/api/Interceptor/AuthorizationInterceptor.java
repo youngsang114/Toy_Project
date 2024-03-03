@@ -47,8 +47,8 @@ public class AuthorizationInterceptor implements HandlerInterceptor {
         Long userId = tokenBusiness.validationAccessToken(accessToken);
 
         if (userId !=null){
-            RequestAttributes requestContext = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
-            requestContext.setAttribute("userId", userId,RequestAttributes.SCOPE_REQUEST);
+            RequestAttributes requestAttributes = Objects.requireNonNull(RequestContextHolder.getRequestAttributes());
+            requestAttributes.setAttribute("userId", userId,RequestAttributes.SCOPE_REQUEST);
             return true;
         }
         throw new ApiException(ErrorCode.SERVER_ERROR,"인증실패");

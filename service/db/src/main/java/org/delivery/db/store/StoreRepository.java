@@ -1,7 +1,7 @@
-package org.delivery.db.user.store;
+package org.delivery.db.store;
 
-import org.delivery.db.user.store.enums.StoreCategory;
-import org.delivery.db.user.store.enums.StoreStatus;
+import org.delivery.db.store.enums.StoreCategory;
+import org.delivery.db.store.enums.StoreStatus;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
@@ -20,5 +20,5 @@ public interface StoreRepository extends JpaRepository<StoreEntity,Long> {
     List<StoreEntity> findAllByStatusOrderByIdDesc(StoreStatus status);
 
     // 유효한 특정 카테고리 스토어 리스트
-    List<StoreStatus> findAllByStatusAndCategoryOrderByStarDesc(StoreStatus status, StoreCategory storeCategory);
+    List<StoreEntity> findAllByStatusAndCategoryOrderByStarDesc(StoreStatus status, StoreCategory storeCategory);
 }

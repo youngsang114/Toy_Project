@@ -1,4 +1,4 @@
-package org.delivery.db.user.store.enums;
+package org.delivery.db.store.enums;
 
 import lombok.AllArgsConstructor;
 

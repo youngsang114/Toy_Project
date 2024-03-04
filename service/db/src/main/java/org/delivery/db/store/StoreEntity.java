@@ -1,4 +1,4 @@
-package org.delivery.db.user.store;
+package org.delivery.db.store;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -7,8 +7,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
-import org.delivery.db.user.store.enums.StoreCategory;
-import org.delivery.db.user.store.enums.StoreStatus;
+import org.delivery.db.store.enums.StoreCategory;
+import org.delivery.db.store.enums.StoreStatus;
 
 import java.math.BigDecimal;
 
@@ -48,5 +48,10 @@ public class StoreEntity extends BaseEntity {
 
     @Column(length = 20)
     private String phoneNumber;
+
+    public void starAndStatus(double star,StoreStatus status){
+        this.star = star;
+        this.status=status;
+    }
 
 }

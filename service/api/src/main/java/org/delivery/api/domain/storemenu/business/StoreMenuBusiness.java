@@ -11,6 +11,7 @@ import org.delivery.api.domain.storemenu.converter.StoreMenuConverter;
 import org.delivery.api.domain.storemenu.service.StoreMenuService;
 import org.delivery.db.store.StoreEntity;
 import org.delivery.db.storemenu.StoreMenuEntity;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -25,6 +26,7 @@ public class StoreMenuBusiness {
     private final StoreMenuConverter storeMenuConverter;
 
     // register
+    @Transactional
     public StoreMenuResponse register(StoreMenuRegisterRequest request){
 
         StoreEntity store = storeService.findById(request.getStoreId())

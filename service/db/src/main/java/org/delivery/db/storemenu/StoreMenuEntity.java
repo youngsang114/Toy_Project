@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
+import org.delivery.db.store.StoreEntity;
 import org.delivery.db.storemenu.enums.StoreMenuStatus;
 
 import java.math.BigDecimal;
@@ -19,8 +20,10 @@ import java.math.BigDecimal;
 @Entity
 @Table(name = "store_menu")
 public class StoreMenuEntity extends BaseEntity {
-    @Column(nullable = false)
-    private Long storeId;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "store_id")
+    StoreEntity storeEntity;
 
     @Column(length = 100, nullable = false)
     private String name;

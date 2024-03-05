@@ -50,4 +50,8 @@ public class StoreService {
         List<StoreEntity> list = storeRepository.findAllByStatusOrderByIdDesc(StoreStatus.REGISTERED);
         return list;
     }
+
+    public Optional<StoreEntity> findById(Long id){
+        return storeRepository.findById(id);
+    }
 }

@@ -34,4 +34,5 @@ public class StoreMenuService {
                     return storeMenuRepository.save(it);
                 }).orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
     }
+
 }

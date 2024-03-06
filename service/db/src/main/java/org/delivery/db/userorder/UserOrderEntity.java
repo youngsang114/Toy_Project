@@ -33,11 +33,11 @@ public class UserOrderEntity extends BaseEntity {
     @Column(precision = 11,scale = 4, nullable = false)
     private BigDecimal amount;
 
-    private LocalDateTime orderAt;
+    private LocalDateTime orderedAt;
 
     private LocalDateTime acceptedAt;
 
-    private LocalDateTime cookingStaredAt;
+    private LocalDateTime cookingStartedAt;
 
     private LocalDateTime receivedAt;
 }

@@ -39,5 +39,27 @@ public class UserOrderEntity extends BaseEntity {
 
     private LocalDateTime cookingStartedAt;
 
+    private LocalDateTime deliveryStartedAt;
+
     private LocalDateTime receivedAt;
+
+    public void orderStart(){
+        this.status = UserOrderStatus.ORDER;
+        this.orderedAt=LocalDateTime.now();
+    }
+    public void changeStatus(UserOrderStatus status){
+        this.status = status;
+    }
+    public void orderAccept(LocalDateTime time){
+        this.acceptedAt= time;
+    }
+    public void cookingStart(LocalDateTime time){
+        this.cookingStartedAt= time;
+    }
+    public void deliveryStart(LocalDateTime time){
+        this.deliveryStartedAt= time;
+    }
+    public void deliveryFinish(LocalDateTime time){
+        this.receivedAt= time;
+    }
 }

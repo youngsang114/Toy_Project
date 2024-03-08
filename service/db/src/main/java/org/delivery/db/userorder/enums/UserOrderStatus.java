@@ -11,7 +11,7 @@ public enum UserOrderStatus {
     ACCEPT("확인"),
     COOKING("요리중"),
     DELIVERY("배달중"),
-    RECEIVE("완료"),
+    RECEIVE("완료")
     ;
 
     private String description;

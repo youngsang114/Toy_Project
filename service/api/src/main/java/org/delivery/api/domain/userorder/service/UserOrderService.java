@@ -7,6 +7,7 @@ import org.delivery.db.userorder.UserOrderEntity;
 import org.delivery.db.userorder.UserOrderRepository;
 import org.delivery.db.userorder.enums.UserOrderStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -14,6 +15,7 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
+@Transactional
 public class UserOrderService {
 
     private final UserOrderRepository userOrderRepository;
@@ -72,6 +74,7 @@ public class UserOrderService {
             UserOrderEntity userOrderEntity
     ){
         return Optional.ofNullable(userOrderEntity)
+
                 .map(it ->{
                     it.orderStart();
                     return userOrderRepository.save(it);

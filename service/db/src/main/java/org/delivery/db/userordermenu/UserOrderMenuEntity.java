@@ -32,7 +32,15 @@ public class UserOrderMenuEntity extends BaseEntity {
     @Column(length = 50, nullable = false)
     private UserOrderMenuStatus status;
 
+    public void setStoreMenu(StoreMenuEntity storeMenu) {
+        this.storeMenu = storeMenu;
+    }
+
     public void changeMenuRegistered(){
         this.status = UserOrderMenuStatus.REGISTERED;
     }
+
+    public void setUserOrder(UserOrderEntity userOrderEntity) {
+    }
+
 }

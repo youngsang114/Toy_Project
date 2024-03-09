@@ -15,7 +15,6 @@ import java.util.Optional;
 
 @RequiredArgsConstructor
 @Service
-@Transactional
 public class UserOrderService {
 
     private final UserOrderRepository userOrderRepository;
@@ -74,13 +73,13 @@ public class UserOrderService {
             UserOrderEntity userOrderEntity
     ){
         return Optional.ofNullable(userOrderEntity)
-
                 .map(it ->{
                     it.orderStart();
                     return userOrderRepository.save(it);
                 })
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
+
 
     // 상태 변경
     public UserOrderEntity setStatus(UserOrderEntity userOrderEntity, UserOrderStatus status){

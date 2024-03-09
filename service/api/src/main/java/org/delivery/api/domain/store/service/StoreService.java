@@ -24,6 +24,7 @@ public class StoreService {
         return storeRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreStatus.REGISTERED)
                 .orElseThrow(() -> new ApiException(ErrorCode.NULL_POINT));
     }
+
     // 스토어 등록
     @Transactional
     public StoreEntity register(StoreEntity storeEntity){

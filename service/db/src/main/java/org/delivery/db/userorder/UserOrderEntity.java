@@ -9,9 +9,12 @@ import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
 import org.delivery.db.user.UserEntity;
 import org.delivery.db.userorder.enums.UserOrderStatus;
+import org.delivery.db.userordermenu.UserOrderMenuEntity;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "user_order")
@@ -43,10 +46,20 @@ public class UserOrderEntity extends BaseEntity {
 
     private LocalDateTime receivedAt;
 
+    @OneToMany(mappedBy = "userOrder", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserOrderMenuEntity> userOrderMenuList = new ArrayList<>();
+
+    // UserOrderMenuEntity를 UserOrder에 추가하는 메서드
+    public void addUserOrderMenu(UserOrderMenuEntity userOrderMenu) {
+        userOrderMenuList.add(userOrderMenu);
+        userOrderMenu.setUserOrder(this);
+    }
+
     public void orderStart(){
         this.status = UserOrderStatus.ORDER;
         this.orderedAt=LocalDateTime.now();
     }
+
     public void changeStatus(UserOrderStatus status){
         this.status = status;
     }

@@ -9,8 +9,11 @@ import lombok.experimental.SuperBuilder;
 import org.delivery.db.BaseEntity;
 import org.delivery.db.store.StoreEntity;
 import org.delivery.db.storemenu.enums.StoreMenuStatus;
+import org.delivery.db.userordermenu.UserOrderMenuEntity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @EqualsAndHashCode(callSuper = true)
@@ -40,7 +43,21 @@ public class StoreMenuEntity extends BaseEntity {
     private int likeCount;
     private int sequence;
 
+    // 양방향 연관관계 설정
+    @OneToMany(mappedBy = "storeMenu", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserOrderMenuEntity> userOrderMenuList = new ArrayList<>();
+
+    // UserOrderMenuEntity를 storeMenu에 추가하는 메서드
+    public void  addUserOrderMenu(UserOrderMenuEntity userOrderMenu) {
+        userOrderMenuList.add(userOrderMenu);
+        userOrderMenu.setStoreMenu(this);
+    }
+
     public void changeStatus(StoreMenuStatus status){
         this.status = status;
+    }
+
+    public void store(StoreEntity storeEntity){
+        this.storeEntity = storeEntity;
     }
 }

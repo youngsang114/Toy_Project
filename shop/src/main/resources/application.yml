@@ -1,0 +1,31 @@
+# 서버 포트 설정
+server:
+  port: 8080
+
+# db 연동 설정
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/shop?serverTimezone=Asia/Seoul
+    username: root
+    password: 1234
+  thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    cache: false
+
+  # spring data jpa 설정
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    database-platform:
+      hibernate.dialect.MySQL8Dialect:
+      properties:
+        hibernate:
+          #show_sql: true
+          format_sql: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug # hibernate에서 생성하는 sql을 logger을 이용해서 보는 설정
+    org.hibernate.orm.jdbc.bind: trace

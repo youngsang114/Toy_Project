@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+# db 연동 설정
+spring:
+  application:
+    name: store-admin
+  # spring data jpa 설정
+  jpa:
+    hibernate:
+      ddl-auto: validate
+      properties:
+        hibernate:
+          #show_sql: true
+          format_sql: true
+          dialect: org.hibernate.dialect.MySQL8Dialect
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3307/delivery?useSSL=false&useUnicode=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Seoul
+    username: root
+    password: root1234!!
+
+
+logging:
+  level:
+    org.hibernate.SQL: debug # hibernate에서 생성하는 sql을 logger을 이용해서 보는 설정
+    org.hibernate.orm.jdbc.bind: trace  # hibernate 에서 쿼리 파라 미터를 ?에서 실제로 보는 설정

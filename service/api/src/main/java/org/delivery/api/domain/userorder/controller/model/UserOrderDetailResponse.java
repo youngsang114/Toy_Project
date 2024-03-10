@@ -15,7 +15,7 @@ public class UserOrderDetailResponse {
     // 사용자에 대한 주문건
     private UserOrderResponse userOrderResponse;
     // 가게가 어딘지
-    private StoreResponse storeResponse;
+//    private StoreResponse storeResponse;
     // 어떠한 매뉴를 주문했는지
     private List<StoreMenuResponse> storeMenuResponseList;
 

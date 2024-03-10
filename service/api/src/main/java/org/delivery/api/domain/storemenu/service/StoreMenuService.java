@@ -22,6 +22,10 @@ public class StoreMenuService {
         Optional<StoreMenuEntity> entity = storeMenuRepository.findFirstByIdAndStatusOrderByIdDesc(id, StoreMenuStatus.REGISTERED);
         return entity.orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
     }
+    public StoreMenuEntity getStoreMenuWithFetchJoin(Long id){
+        Optional<StoreMenuEntity> entity = storeMenuRepository.findFirstByIdAndStatusOrderByIdDescWithFetchJoin(id, StoreMenuStatus.REGISTERED);
+        return entity.orElseThrow(()-> new ApiException(ErrorCode.NULL_POINT));
+    }
 
     public List<StoreMenuEntity> getStoreMenuStoreId(Long storeId){
         return storeMenuRepository.findAllByStoreIdAndStatusOrderBySequenceDesc(storeId,StoreMenuStatus.REGISTERED);

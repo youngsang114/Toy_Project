@@ -60,4 +60,9 @@ public class StoreMenuEntity extends BaseEntity {
     public void store(StoreEntity storeEntity){
         this.storeEntity = storeEntity;
     }
+
+    public void setStoreEntity(StoreEntity storeWithThrow) {
+
+    }
+
 }

@@ -43,4 +43,11 @@ public class UserOrderMenuEntity extends BaseEntity {
     public void setUserOrder(UserOrderEntity userOrderEntity) {
     }
 
+    public void setStoreMenuEntity(StoreMenuEntity it) {
+
+    }
+
+    public void setUserOrderEntity(UserOrderEntity newUserOrderEntity) {
+
+    }
 }

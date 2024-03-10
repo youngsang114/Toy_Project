@@ -62,30 +62,32 @@ public class UserOrderBusiness {
         UserEntity userEntity = userService.getUserWithThrow(user.getId());
         Long orderId = userEntity.getId();
 
+        // 주문
         UserOrderEntity userOrderEntity = userOrderConverter.toEntity(user, storeMenuEntityList, userEntity);
 
-        // 주문
-        UserOrderEntity newUserOrderEntity = userOrderService.order(userOrderEntity);
-
-        // 매핑
+        // 양방향 관계 설정
         List<UserOrderMenuEntity> userOrderMenuEntityList = storeMenuEntityList.stream()
                 .map(it -> {
-                    //menu + user order
-                    UserOrderMenuEntity userOrderMenuEntity = userOrderMenuConverter.toEntity(newUserOrderEntity, it);
+                    UserOrderMenuEntity userOrderMenuEntity = userOrderMenuConverter.toEntity(userOrderEntity, it);
+                    // StoreMenuEntity에 대한 양방향 설정
+                    it.addUserOrderMenu(userOrderMenuEntity);
+
 
                     return userOrderMenuEntity;
                 }).collect(Collectors.toList());
 
-        // 주문 내역에 기록 남기기
-        userOrderMenuEntityList.forEach(it ->{
-            userOrderMenuService.order(it);
+        // user_order 테이블에 저장
+        UserOrderEntity newUserOrderEntity = userOrderService.order(userOrderEntity);
+
+        // user_order_menu 테이블에 저장
+        userOrderMenuEntityList.forEach(userOrderMenuEntity -> {
+            userOrderMenuService.order(userOrderMenuEntity);
         });
 
         // response
-
-        return userOrderConverter.toResponse(newUserOrderEntity,orderId);
-
+        return userOrderConverter.toResponse(newUserOrderEntity, orderId);
     }
+
 
     @Transactional
     public List<UserOrderDetailResponse> current(User user) {
@@ -97,11 +99,12 @@ public class UserOrderBusiness {
 //                    List<UserOrderMenuEntity> userOrderMenuList = userOrderMenuService.getUserOrderMenu(it.getId());
                     List<UserOrderMenuEntity> userOrderMenuList = it.getUserOrderMenuList(); // 양방향 관계로 변경된 부분
 
+
                     List<StoreMenuEntity> storeMenuEntityList = userOrderMenuList.stream()
                             .map(userOrderMenuEntity -> {
-
-                                StoreMenuEntity storeMenuEntity = storeMenuService.getStoreMenuWithThrow(userOrderMenuEntity.getStoreMenu().getId());
-//                                storeMenuEntity.store(storeService.getStoreWithThrow(userOrderMenuEntity.getStoreMenu().getId()));
+                                // getId()를 호출하여 프록시를 초기화
+                                Long storeId = userOrderMenuEntity.getStoreMenu().getStoreEntity().getId();
+                                StoreMenuEntity storeMenuEntity = storeMenuService.getStoreMenuWithFetchJoin(userOrderMenuEntity.getStoreMenu().getId());
 
                                 return storeMenuEntity;
                             })
@@ -110,13 +113,12 @@ public class UserOrderBusiness {
 
 
                     // 사용자가 주문한 스토어 TODO 리팩터링 필요
-                    StoreEntity storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreEntity().getId());
-
+//                    StoreEntity storeEntity = storeService.getStoreWithThrow(storeMenuEntityList.stream().findFirst().get().getStoreEntity().getId());
 
                     return UserOrderDetailResponse.builder()
                             .userOrderResponse(userOrderConverter.toResponse(it, user.getId()))
                             .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
-                            .storeResponse(storeConverter.toResponse(storeEntity))
+//                            .storeResponse(storeConverter.toResponse(storeEntity))
                             .build()
                             ;
                 }).collect(Collectors.toList());
@@ -148,7 +150,7 @@ public class UserOrderBusiness {
                     return UserOrderDetailResponse.builder()
                             .userOrderResponse(userOrderConverter.toResponse(it, user.getId()))
                             .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
-                            .storeResponse(storeConverter.toResponse(storeEntity))
+//                            .storeResponse(storeConverter.toResponse(storeEntity))
                             .build()
                             ;
                 }).collect(Collectors.toList());
@@ -175,7 +177,7 @@ public class UserOrderBusiness {
         return UserOrderDetailResponse.builder()
                 .userOrderResponse(userOrderConverter.toResponse(userOrderEntity, user.getId()))
                 .storeMenuResponseList(storeMenuConverter.toResponse(storeMenuEntityList))
-                .storeResponse(storeConverter.toResponse(storeEntity))
+//                .storeResponse(storeConverter.toResponse(storeEntity))
                 .build()
                 ;
 

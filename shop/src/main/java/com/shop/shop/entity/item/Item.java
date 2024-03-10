@@ -1,6 +1,6 @@
-package com.shop.entity.item;
+package com.shop.shop.entity;
 
-import com.shop.entity.item.enums.ItemSellStatus;
+import com.shop.shop.entity.item.enums.ItemSellStatus;
 import jakarta.persistence.*;
 import lombok.*;
 

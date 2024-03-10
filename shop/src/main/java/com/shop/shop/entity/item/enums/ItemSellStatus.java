@@ -1,4 +1,4 @@
-package com.shop.entity.item.enums;
+package com.shop.shop.entity.item.enums;
 
 import lombok.AllArgsConstructor;
 

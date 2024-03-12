@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @Builder
 @EqualsAndHashCode
+@ToString
 public class Item {
 
     @Id
@@ -37,4 +38,14 @@ public class Item {
 
     private LocalDateTime regTime;
     private LocalDateTime updateTime;
+
+    public Item(String itemName, int price, Integer stockNumber, String itemDetail, ItemSellStatus status, LocalDateTime regTime, LocalDateTime updateTime) {
+        this.itemName = itemName;
+        this.price = price;
+        this.stockNumber = stockNumber;
+        this.itemDetail = itemDetail;
+        this.status = status;
+        this.regTime = regTime;
+        this.updateTime = updateTime;
+    }
 }

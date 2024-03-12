@@ -14,18 +14,19 @@ spring:
     suffix: .html
     cache: false
 
-  # spring data jpa 설정
+
   jpa:
     hibernate:
       ddl-auto: validate
-    database-platform:
-      hibernate.dialect.MySQL8Dialect:
-      properties:
-        hibernate:
-          #show_sql: true
-          format_sql: true
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    properties:
+#      hibernate.show_sql: true
+      hibernate.format_sql: true
+
+
 
 logging:
   level:
     org.hibernate.SQL: debug # hibernate에서 생성하는 sql을 logger을 이용해서 보는 설정
     org.hibernate.orm.jdbc.bind: trace
+

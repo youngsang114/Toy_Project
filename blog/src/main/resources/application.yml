@@ -1,0 +1,19 @@
+spring:
+  jpa:
+    hibernate:
+      ddl-auto: create
+#    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+    defer-datasource-initialization: true
+  datasource:
+    url: jdbc:h2:mem:testdb
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    org.hibernate.SQL: debug # hibernate에서 생성하는 sql을 logger을 이용해서 보는 설정
+    org.hibernate.orm.jdbc.bind: trace  # hibernate 에서 쿼리 파라 미터를 ?에서 실제로 보는 설정

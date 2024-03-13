@@ -24,6 +24,13 @@ public class Result {
                 .resultDescription("성공입니다")
                 .build();
     }
+    public static Result OK_DELETE(){
+        return Result.builder()
+                .resultCode(ErrorCode.OK.getErrorCode())
+                .resultMessage(ErrorCode.OK.getDescription())
+                .resultDescription("삭제 성공입니다")
+                .build();
+    }
 
     public static Result Error(ErrorCodeIfs errorCodeIfs){
         return Result.builder()

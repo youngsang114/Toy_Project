@@ -20,6 +20,11 @@ public class Api<T> {
         api.body=data;
         return api;
     }
+    public static  Api<Object> OK_DELETE(){
+        Api<Object> api = new Api<>();
+        api.result=Result.OK_DELETE();
+        return api;
+    }
 
     public static Api<Object> Error(Result result){
         Api<Object> api = new Api<>();

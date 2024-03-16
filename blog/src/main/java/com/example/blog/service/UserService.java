@@ -1,24 +1,23 @@
 package com.example.blog.service;
 
-import com.example.blog.common.error.UserError;
-import com.example.blog.common.exception.ApiException;
+import com.example.blog.domain.User;
+import com.example.blog.dto.AddUserRequest;
 import com.example.blog.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-@Service
 @RequiredArgsConstructor
-public class UserService implements UserDetailsService {
+@Service
+public class UserService {
 
     private final UserRepository userRepository;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        return userRepository.findByEmail(email)
-                .orElseThrow(() -> new ApiException(UserError.NOT_FOUND_USER));
+    public Long save(AddUserRequest dto){
+        return userRepository.save(User.builder()
+                .email(dto.getEmail())
+                .password(bCryptPasswordEncoder.encode(dto.getPassword()))
+                .build()).getId();
     }
 }

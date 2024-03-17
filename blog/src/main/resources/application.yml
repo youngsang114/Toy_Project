@@ -23,7 +23,10 @@ spring:
   h2:
     console:
       enabled: true
-
+jwt:
+  issuer: abc@naver.com
+  secret:
+    key: SpringBootJWTHelperTokenSecretKeyValue123!@#
 
 
 logging:

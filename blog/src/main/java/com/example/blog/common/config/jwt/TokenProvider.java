@@ -1,8 +1,7 @@
 package com.example.blog.common.config.jwt;
 
-import com.example.blog.common.error.ErrorCodeIfs;
 import com.example.blog.common.error.TokenError;
-import com.example.blog.common.exception.ApiException;
+import com.example.blog.common.exception.TokenException;
 import com.example.blog.domain.User;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.security.Keys;
@@ -63,15 +62,15 @@ public class TokenProvider {
             return true;
         } catch (Exception e){
             if (e instanceof SignatureException){
-                throw new ApiException(TokenError.INVALID_TOKEN);
+                throw new TokenException(TokenError.INVALID_TOKEN);
             }
             else if (e instanceof ExpiredJwtException) {
                 // 만료된 토큰
-                throw new ApiException(TokenError.EXPIRED_AT,e);
+                throw new TokenException(TokenError.EXPIRED_AT,e);
             }
             else {
                 // 그 외 처리
-                throw new ApiException(TokenError.INVALID_TOKEN,e);
+                throw new TokenException(TokenError.INVALID_TOKEN,e);
             }
         }
     }

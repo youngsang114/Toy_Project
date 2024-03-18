@@ -6,6 +6,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.Builder;
 import lombok.Getter;
 
+import java.nio.charset.StandardCharsets;
 import java.time.Duration;
 import java.util.Collections;
 import java.util.Date;
@@ -24,7 +25,7 @@ public class JwtFactory {
                       Map<String,Object> claims){
         this.subject = subject != null ? subject : this.subject;
         this.issuedAt = issuedAt !=null ? issuedAt : this.issuedAt;
-        this.expiration = expiration !=null ? expiration : this.issuedAt;
+        this.expiration = expiration !=null ? expiration : this.expiration;
         this.claims = claims != null ? claims : this.claims;
 
     }
@@ -41,7 +42,7 @@ public class JwtFactory {
                 .setIssuedAt(issuedAt)
                 .setExpiration(expiration)
                 .addClaims(claims)
-                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey())
+                .signWith(SignatureAlgorithm.HS256, jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8))
                 .compact();
     }
 

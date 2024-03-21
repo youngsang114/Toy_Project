@@ -1,5 +1,7 @@
 package com.example.SpringJWT.config;
 
+import com.example.SpringJWT.config.jwt.JwtFilter;
+import com.example.SpringJWT.config.jwt.JwtUtil;
 import com.example.SpringJWT.config.jwt.LoginFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +21,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class SecurityConfig {
 
     private final AuthenticationConfiguration authenticationConfiguration;
+    private final JwtUtil jwtUtil;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -41,7 +44,8 @@ public class SecurityConfig {
                         .requestMatchers("/login", "/", "/join").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
-                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration)), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
+                .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class)
                 // jwt는 세션을 stateless하게 관리한다
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

@@ -1,13 +1,14 @@
 package com.example.SpringJWT.entity;
 
 import jakarta.persistence.*;
-import lombok.Builder;
-import lombok.Getter;
+import lombok.*;
 
 @Entity
 @Table
 @Getter
 @Builder
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class UserEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)

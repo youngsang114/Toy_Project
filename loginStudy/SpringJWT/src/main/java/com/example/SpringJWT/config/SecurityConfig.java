@@ -3,6 +3,7 @@ package com.example.SpringJWT.config;
 import com.example.SpringJWT.config.jwt.JwtFilter;
 import com.example.SpringJWT.config.jwt.JwtUtil;
 import com.example.SpringJWT.config.jwt.LoginFilter;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -14,6 +15,10 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+
+import java.util.Collections;
 
 @Configuration
 @EnableWebSecurity
@@ -33,6 +38,25 @@ public class SecurityConfig {
 
 
         return http
+                .cors((cors)->cors
+                        .configurationSource(new CorsConfigurationSource() {
+                            @Override
+                            public CorsConfiguration getCorsConfiguration(HttpServletRequest request) {
+
+                                CorsConfiguration configuration = new CorsConfiguration();
+                                // 허용할 front 서버 주소
+                                configuration.setAllowedOrigins(Collections.singletonList("http://localhost:3000"));
+                                // get,post 등등 모든 방식 허용
+                                configuration.setAllowedMethods(Collections.singletonList("*"));
+                                configuration.setAllowCredentials(true);
+                                configuration.setAllowedHeaders(Collections.singletonList("*"));
+                                configuration.setMaxAge(3600L);
+
+                                configuration.setExposedHeaders(Collections.singletonList("Authorization"));
+
+                                return configuration;
+                            }
+                        }))
                 // csrf disable
                 .csrf((auth) -> auth.disable())
                 // Form 로그인 방식 disable -> jwt 인증 방식을 사용할 것이기 때문에

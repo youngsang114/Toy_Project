@@ -1,5 +1,6 @@
 package com.example.SpringJWT.config;
 
+import com.example.SpringJWT.common.error.JwtExceptionHandler;
 import com.example.SpringJWT.config.jwt.JwtFilter;
 import com.example.SpringJWT.config.jwt.JwtUtil;
 import com.example.SpringJWT.config.jwt.LoginFilter;
@@ -70,6 +71,7 @@ public class SecurityConfig {
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration), jwtUtil), UsernamePasswordAuthenticationFilter.class)
+                .addFilterBefore(new JwtExceptionHandler(), JwtFilter.class)
                 // jwt는 세션을 stateless하게 관리한다
                 .sessionManagement((session) -> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

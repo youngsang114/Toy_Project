@@ -41,32 +41,29 @@ public class JwtFilter extends OncePerRequestFilter {
         // 가져온 값에서 접두사 제거 -> 토큰 꺼내 오기
         String token = getAccessToken(authorization);
 
-        // 토큰 소멸 시간 검증
-        if (jwtUtil.isExpired(token)){
-            log.info("token expired");
-            throw new TokenException(TokenErrorCode.EXPIRED_AT);
-//            filterChain.doFilter(request,response);
+        if (jwtUtil.validToken(token)){
+
+            // 토큰에서 username, role 획득
+            String email = jwtUtil.getUsername(token);
+            String role = jwtUtil.getRole(token);
+
+            // userEntity를 생성해서 해당 값을 넣어준다
+            UserEntity userEntity = UserEntity.builder()
+                    .email(email)
+                    .role(role)
+                    .password("temppassword")
+                    .build();
+
+            //UserDetails에 회원 정보 객체 담기
+            CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
+
+            //스프링 시큐리티 인증 토큰 생성
+            Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
+
+            //세션에 사용자 등록
+            SecurityContextHolder.getContext().setAuthentication(authToken);
         }
 
-        // 토큰에서 username, role 획득
-        String email = jwtUtil.getUsername(token);
-        String role = jwtUtil.getRole(token);
-
-        // userEntity를 생성해서 해당 값을 넣어준다
-        UserEntity userEntity = UserEntity.builder()
-                .email(email)
-                .role(role)
-                .password("temppassword")
-                .build();
-
-        //UserDetails에 회원 정보 객체 담기
-        CustomUserDetails customUserDetails = new CustomUserDetails(userEntity);
-
-        //스프링 시큐리티 인증 토큰 생성
-        Authentication authToken = new UsernamePasswordAuthenticationToken(customUserDetails, null, customUserDetails.getAuthorities());
-
-        //세션에 사용자 등록
-        SecurityContextHolder.getContext().setAuthentication(authToken);
 
         filterChain.doFilter(request, response);
     }

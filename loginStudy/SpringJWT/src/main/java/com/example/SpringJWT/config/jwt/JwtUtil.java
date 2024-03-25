@@ -38,6 +38,13 @@ public class JwtUtil {
                 .getPayload()
                 .get("role", String.class);
     }
+    public String getCategory(String token){
+        JwtParser parser = makeParser();
+
+        return parser.parseSignedClaims(token)
+                .getPayload()
+                .get("category", String.class);
+    }
 
     // 전달 받은 토큰이 만료되었는지 확인 -> Bool 반환
     public Boolean isExpired(String token){
@@ -49,9 +56,11 @@ public class JwtUtil {
                 .before(new Date());
     }
 
+
     // 토큰을 생성 하는 메서드
-    public String createJwt(String username, String role, Long expiredMs){
+    public String createJwt(String category, String username, String role, Long expiredMs){
         return Jwts.builder()
+                .claim("category" ,category)
                 .claim("username", username)
                 .claim("role",role)
                 .issuedAt(new Date(System.currentTimeMillis()))

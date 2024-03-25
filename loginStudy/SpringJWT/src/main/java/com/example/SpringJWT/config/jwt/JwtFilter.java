@@ -16,6 +16,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+
 @RequiredArgsConstructor
 @Slf4j
 public class JwtFilter extends OncePerRequestFilter {
@@ -42,6 +44,20 @@ public class JwtFilter extends OncePerRequestFilter {
         String token = getAccessToken(authorization);
 
         if (jwtUtil.validToken(token)){
+
+            // 토큰이 access인지 확인 (발급시 페이로드에 명시)
+            String category = jwtUtil.getCategory(token);
+
+            if (!category.equals("access")) {
+
+                //response body
+                PrintWriter writer = response.getWriter();
+                writer.print("invalid access token");
+
+                //response status code
+                response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                return;
+            }
 
             // 토큰에서 username, role 획득
             String email = jwtUtil.getUsername(token);

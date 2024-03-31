@@ -1,6 +1,6 @@
 package com.example.SpringJWT.config;
 
-import com.example.SpringJWT.common.error.JwtExceptionHandler;
+import com.example.SpringJWT.config.jwt.JwtExceptionHandler;
 import com.example.SpringJWT.config.jwt.CustomLogoutFilter;
 import com.example.SpringJWT.config.jwt.JwtFilter;
 import com.example.SpringJWT.config.jwt.JwtUtil;

@@ -1,4 +1,4 @@
-package com.example.SpringJWT.common.error;
+package com.example.SpringJWT.config.jwt;
 
 import com.example.SpringJWT.common.api.Result;
 import com.example.SpringJWT.common.exception.TokenException;

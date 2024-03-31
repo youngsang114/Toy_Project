@@ -1,5 +1,7 @@
 package com.shop.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.shop.config.admin.CustomAuthenticationEntryPoint;
 import com.shop.config.jwt.*;
 import com.shop.refressh.repository.RefreshRepository;
 import lombok.RequiredArgsConstructor;
@@ -23,6 +25,7 @@ public class SecurityConfig {
     private final JwtUtil jwtUtil;
     private final AuthenticationConfiguration authenticationConfiguration;
     private final RefreshRepository refreshRepository;
+    private final ObjectMapper objectMapper;
 
     @Bean
     public BCryptPasswordEncoder bCryptPasswordEncoder(){
@@ -37,13 +40,14 @@ public class SecurityConfig {
                 // 경로별 인가 작업
                 .authorizeHttpRequests((auth)->auth
                         .requestMatchers("/login","/","/members/new").permitAll()
-                        .requestMatchers("/admin").hasRole("ADMIN")
+                        .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated())
                 .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil,refreshRepository), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtExceptionHandler(), JwtFilter.class)
                 .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class)
+                .exceptionHandling((authenticationManager)->authenticationManager.authenticationEntryPoint(new CustomAuthenticationEntryPoint(objectMapper)))
                 // jwt는 session을 stateless하게 관리
                 .sessionManagement((session)-> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

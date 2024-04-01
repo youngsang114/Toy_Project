@@ -39,15 +39,16 @@ public class SecurityConfig {
                 .httpBasic((auth)->auth.disable())
                 // 경로별 인가 작업
                 .authorizeHttpRequests((auth)->auth
-                        .requestMatchers("/login","/","/members/new").permitAll()
+                        .requestMatchers("/login","/","/members/new","/error").permitAll()
                         .requestMatchers("/admin/**").hasRole("ADMIN")
                         .requestMatchers("/reissue").permitAll()
                         .anyRequest().authenticated())
+
                 .addFilterBefore(new JwtFilter(jwtUtil), LoginFilter.class)
                 .addFilterAt(new LoginFilter(authenticationManager(authenticationConfiguration),jwtUtil,refreshRepository), UsernamePasswordAuthenticationFilter.class)
                 .addFilterBefore(new JwtExceptionHandler(), JwtFilter.class)
                 .addFilterBefore(new CustomLogoutFilter(jwtUtil, refreshRepository), LogoutFilter.class)
-                .exceptionHandling((authenticationManager)->authenticationManager.authenticationEntryPoint(new CustomAuthenticationEntryPoint(objectMapper)))
+//                .exceptionHandling((authenticationManager)->authenticationManager.authenticationEntryPoint(new CustomAuthenticationEntryPoint(objectMapper)))
                 // jwt는 session을 stateless하게 관리
                 .sessionManagement((session)-> session
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))

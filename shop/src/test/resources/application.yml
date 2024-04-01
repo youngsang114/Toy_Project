@@ -8,3 +8,5 @@ spring:
     properties:
 #      hibernate.show_sql: true
       hibernate.format_sql: true
+  jwt:
+    secret-key: springbootstudyjwttoken20240331thiskeyshouldbelong

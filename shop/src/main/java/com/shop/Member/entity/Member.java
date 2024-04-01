@@ -36,7 +36,7 @@ public class Member {
                 .email(memberJoinDto.getEmail())
                 .password(encoder.encode(memberJoinDto.getPassword()))
                 .address(memberJoinDto.getAddress())
-                .role("USER")
+                .role("ROLE_ADMIN")
                 .build();
     }
 }

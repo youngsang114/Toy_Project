@@ -59,7 +59,12 @@ public class RestApiController {
         log.info("a*b : "+a*b);
 
     }
-
-
-
+    @DeleteMapping(path = {
+            "/user/{userName}/delete",
+            "/user/{userName}/del"}) // path로 명시 하면 {}안에 여러 주소를 넣어줄 수 있다
+    public void delete(
+        @PathVariable("userName") String userName
+    ){
+        log.info("user-name : {}",userName);
+    }
 }

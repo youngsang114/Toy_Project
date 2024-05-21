@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 @JsonNaming(value = PropertyNamingStrategies.SnakeCaseStrategy.class) // 헤당 클래스의 변수들을 snake_case로 매핑하겠다!
 public class UserRequest {
     private String userName;
-    private String userAge;
+    private Integer userAge;
     private String email;
     private Boolean isKorean; // is_korean, boolean의 기본값 false
                               // primitive type에서 is 시리지는 boolean을 듯하기 때문에 setIsKorean이 아닌 SetKorean으로 만들어진다

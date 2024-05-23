@@ -14,9 +14,6 @@ class JwtApplicationTests {
 	private JwtService jwtService;
 
 	@Test
-	void contextLoads() {
-	}
-	@Test
 	void tokenCreate(){
 		HashMap<String, Object> claims = new HashMap<>();
 		claims.put("user_id",923);

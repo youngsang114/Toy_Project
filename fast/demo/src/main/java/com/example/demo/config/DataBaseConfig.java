@@ -4,10 +4,10 @@ import com.example.demo.user.Respository.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-@Configuration
-public class DataBaseConfig {
-    @Bean
-    public UserRepository userRepository() {
-        return new UserRepository();
-    };
-}
+//@Configuration
+//public class DataBaseConfig {
+//    @Bean
+//    public UserRepository userRepository() {
+//        return new UserRepository();
+//    };
+//}

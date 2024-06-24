@@ -12,8 +12,8 @@ public class WebConfig implements WebMvcConfigurer {
     private OpenApiInterceptor openApiInterceptor;
     @Override
     public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(openApiInterceptor)
-                .addPathPatterns("/**")
-                .excludePathPatterns();
+//        registry.addInterceptor(openApiInterceptor)
+//                .addPathPatterns("/**")
+//                .excludePathPatterns();
     }
 }

@@ -1,6 +1,6 @@
 package com.study.SecurityJWT.common.exception;
 
-import com.example.SpringJWT.common.error.ErrorCodeIfs;
+import com.study.SecurityJWT.common.error.ErrorCodeIfs;
 import lombok.Getter;
 @Getter
 public class ApiException extends RuntimeException implements ApiExceptionIfs{

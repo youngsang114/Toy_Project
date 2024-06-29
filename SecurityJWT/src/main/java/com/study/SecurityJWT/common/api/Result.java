@@ -1,7 +1,7 @@
 package com.study.SecurityJWT.common.api;
 
-import com.example.SpringJWT.common.error.ErrorCode;
-import com.example.SpringJWT.common.error.ErrorCodeIfs;
+import com.study.SecurityJWT.common.error.ErrorCode;
+import com.study.SecurityJWT.common.error.ErrorCodeIfs;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

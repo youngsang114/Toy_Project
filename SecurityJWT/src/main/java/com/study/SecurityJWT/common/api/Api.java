@@ -1,6 +1,6 @@
 package com.study.SecurityJWT.common.api;
 
-import com.example.SpringJWT.common.error.ErrorCodeIfs;
+import com.study.SecurityJWT.common.error.ErrorCodeIfs;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

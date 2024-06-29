@@ -4,6 +4,8 @@ spring:
     url: jdbc:mysql://localhost:3306/solodb?useSSL=false&useUnicode=true&serverTimezone=Asia/Seoul&allowPublicKeyRetrieval=true
     username: root
     password: 1234
+  jwt:
+    secret: springsadlkjflksjklheklfjksljdflsjlkwerlkjsldkjkltjsklmklfhklwejrlksjksldjfklwnelk
 
   jpa:
     hibernate:
@@ -19,4 +21,5 @@ logging:
   level:
     org.hibernate.SQL: debug # hibernate?? ???? sql? logger? ???? ?? ??
     org.hibernate.orm.jdbc.bind: trace
+
 

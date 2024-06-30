@@ -3,6 +3,7 @@ package com.study.SecurityJWT.controller;
 import com.study.SecurityJWT.common.api.Api;
 import com.study.SecurityJWT.jwt.JWTUtil;
 import com.study.SecurityJWT.service.ReissueService;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -46,10 +47,23 @@ public class ReissueController {
 
         //make new JWT
         String newAccess = jwtUtil.createJwt("access", email, role, 600000L);
+        String newRefresh = jwtUtil.createJwt("refresh", email, role, 86400000L);
 
-        // response
+        //response
         response.setHeader("access", newAccess);
+        response.addCookie(createCookie("refresh", newRefresh));
 
         return new ResponseEntity<>(HttpStatus.OK);
+    }
+
+    private Cookie createCookie(String key, String value) {
+
+        Cookie cookie = new Cookie(key, value);
+        cookie.setMaxAge(24*60*60);
+        //cookie.setSecure(true);
+        //cookie.setPath("/");
+        cookie.setHttpOnly(true);
+
+        return cookie;
     }
 }

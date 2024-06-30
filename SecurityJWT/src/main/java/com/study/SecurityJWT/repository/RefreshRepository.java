@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface RefreshRepository extends JpaRepository<RefreshEntity,Long> {
 
-    Boolean existedByRefresh(String refresh);
+    Boolean existsByRefresh(String refresh);
 
     // 과거의 refresh token을 삭제하기 위한 메서드
     @Transactional

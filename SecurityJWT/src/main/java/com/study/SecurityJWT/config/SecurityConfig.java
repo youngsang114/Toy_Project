@@ -62,7 +62,7 @@ public class SecurityConfig {
                 .formLogin((auth) -> auth.disable()) // from 로그인 방식 disable
                 .httpBasic((auth) -> auth.disable()) // http basic 인증 방식 disable
                 .authorizeHttpRequests((auth) -> auth
-                        .requestMatchers("/login", "/", "/join").permitAll()
+                        .requestMatchers("/login", "/", "/join","/reissuei").permitAll()
                         .requestMatchers("/admin").hasRole("ADMIN")
                         .anyRequest().authenticated())
                 .addFilterBefore(new JWTFilter(jwtUtil), LoginFilter.class)
